@@ -150,9 +150,13 @@ INNER JOIN Veiculo ON Estaciona.Placa = Veiculo.Placa
 WHERE Veiculo.Cor = 'Verde';
 
 -- INNER JOIN EX10
-SELECT *
-FROM Estaciona
-WHERE Placa = 'JJJ-2020';
+SELECT * 
+FROM Estaciona 
+INNER JOIN Veiculo
+ON Estaciona.placa = Veiculo.placa
+INNER JOIN Cliente
+ON Cliente.CPF = Veiculo.CPF
+WHERE Veiculo.placa like 'JJJ-2020';
 
 -- INNER JOIN EX11
 SELECT Cliente.Nome
