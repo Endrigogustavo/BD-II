@@ -99,3 +99,9 @@ SELECT Departamentos.NomeDepto, Funcionarios.NomeFunc, Funcionarios.SobreNome
 FROM Departamentos INNER JOIN Funcionarios
 ON Departamentos.Codigo_depto = Funcionarios.CodDepartamento
 ORDER BY Departamentos.NomeDepto, Funcionarios.NomeFunc
+
+-- Sub Query
+Select NomeDepto
+From Funcionarios
+Where Cod_dept =
+(Select CodDept From Departamentos Where NomeDept = 'logistica')
