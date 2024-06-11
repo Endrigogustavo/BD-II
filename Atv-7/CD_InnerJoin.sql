@@ -127,3 +127,20 @@ SELECT CDs.Nome_CD, Musica.Nome_Musica
 FROM CDs INNER JOIN Musica
 ON CDs.COD_CD = Musica.COD_CD
 WHERE Musica.Numero_Musica=1
+
+-- Sub Query
+SELECT Nome_CD
+From CDs
+Where Valor_Pago = (
+Select Max(Valor_Pago) 
+From CDs )
+
+-- Group By
+
+-- Refazer por ser time
+SELECT count(Tempo)
+From Musica Group By Tempo
+
+SELECT count(COD_CD)
+From CDs Group By COD_CD
+
