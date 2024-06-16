@@ -100,8 +100,22 @@ FROM Departamentos INNER JOIN Funcionarios
 ON Departamentos.Codigo_depto = Funcionarios.CodDepartamento
 ORDER BY Departamentos.NomeDepto, Funcionarios.NomeFunc
 
+-- Group By
+SELECT CodDepartamento, SUM(Salario) AS Folha_Pagamento
+FROM Funcionarios
+GROUP BY CodDepartamento;
+
+SELECT CodDepartamento, MIN(Salario) AS Menor_Salario
+FROM Funcionarios
+GROUP BY CodDepartamento;
+
+
 -- Sub Query
-Select NomeDepto
-From Funcionarios
-Where Cod_dept =
-(Select CodDept From Departamentos Where NomeDept = 'logistica')
+SELECT *
+FROM Funcionarios
+WHERE CodDepartamento = (
+    SELECT Codigo_depto
+    FROM Departamentos
+    WHERE NomeDepto = 'Desenvolvimento'
+);
+
