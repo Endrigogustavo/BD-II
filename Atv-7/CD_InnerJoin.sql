@@ -1,23 +1,26 @@
 CREATE DATABASE BD_LojaCD
 USE BD_LojaCD
 
+CREATE DATABASE BD_LojaCD;
+USE BD_LojaCD;
+
 CREATE TABLE CDs(
-	COD_CD INT NOT NULL,
-	Nome_CD VARCHAR(120) NOT NULL,
+    COD_CD INT NOT NULL,
+    Nome_CD VARCHAR(120) NOT NULL,
     Dt_Compra DATE NOT NULL,
     Valor_Pago FLOAT NOT NULL,
     Local_Compra VARCHAR(150) NOT NULL,
-    Album VARCHAR(3) NOT NULL    
+    Album VARCHAR(3) NOT NULL,    
     PRIMARY KEY(COD_CD)
 );
 
 CREATE TABLE Musica(
-	COD_CD INT NOT NULL,
-	Numero_Musica INT NOT NULL,
+    COD_CD INT NOT NULL,
+    Numero_Musica INT NOT NULL,
     Nome_Musica VARCHAR(120) NOT NULL,
     Artista VARCHAR(100) NOT NULL,
-    Tempo TIME
-	FOREIGN KEY (COD_CD) REFERENCES CDs
+    Tempo INT,
+    FOREIGN KEY (COD_CD) REFERENCES CDs(COD_CD)
 );
 
 INSERT INTO CDs (COD_CD, Nome_CD, Dt_Compra, Valor_Pago, Local_Compra, Album)
@@ -33,40 +36,38 @@ VALUES
 (9, 'Electronic Beats', '2024-04-15', 23.00, 'Tech Store', 'sim'),
 (10, 'Reggae Vibes', '2024-06-08', 17.75, 'Record Fair', 'não');
 
-
 INSERT INTO Musica (COD_CD, Numero_Musica, Nome_Musica, Artista, Tempo)
 VALUES
-(1, 1, 'Bohemian Rhapsody', 'Queen', '00:05:55'),
-(1, 2, 'Don''t Stop Believin''', 'Journey', '00:04:11'),
-(1, 3, 'Hotel California', 'Eagles', '00:06:30'),
-(2, 1, 'Billie Jean', 'Michael Jackson', '00:04:54'),
-(2, 2, 'Like a Prayer', 'Madonna', '00:05:51'),
-(2, 3, 'Sweet Child o'' Mine', 'Guns N'' Roses', '00:05:56'),
-(3, 1, 'Stairway to Heaven', 'Led Zeppelin', '00:08:02'),
-(3, 2, 'Imagine', 'John Lennon', '00:03:03'),
-(3, 3, 'Smells Like Teen Spirit', 'Nirvana', '00:05:01'),
-(4, 1, 'Take Five', 'Dave Brubeck', '00:05:24'),
-(4, 2, 'So What', 'Miles Davis', '00:09:22'),
-(4, 3, 'My Favorite Things', 'John Coltrane', '00:13:42'),
-(5, 1, 'Smells Like Teen Spirit', 'Nirvana', '00:05:01'),
-(5, 2, 'Wannabe', 'Spice Girls', '00:02:52'),
-(5, 3, 'I Want It That Way', 'Backstreet Boys', '00:03:33'),
-(6, 1, 'Loser', 'Beck', '00:03:55'),
-(6, 2, 'Creep', 'Radiohead', '00:03:55'),
-(6, 3, 'No Rain', 'Blind Melon', '00:03:37'),
-(7, 1, 'Lose Yourself', 'Eminem', '00:05:26'),
-(7, 2, 'California Love', '2Pac', '00:04:45'),
-(7, 3, 'Gin and Juice', 'Snoop Dogg', '00:03:31'),
-(8, 1, 'Take Me Home, Country Roads', 'John Denver', '00:03:08'),
-(8, 2, 'The Gambler', 'Kenny Rogers', '00:03:32'),
-(8, 3, 'Ring of Fire', 'Johnny Cash', '00:02:37'),
-(9, 1, 'Around the World', 'Daft Punk', '00:07:09'),
-(9, 2, 'Blue Monday', 'New Order', '00:07:29'),
-(9, 3, 'One More Time', 'Daft Punk', '00:05:20'),
-(10, 1, 'Could You Be Loved', 'Bob Marley', '00:03:57'),
-(10, 2, 'Redemption Song', 'Bob Marley', '00:03:49'),
-(10, 3, 'No Woman, No Cry', 'Bob Marley', '00:07:09');
-
+(1, 1, 'Bohemian Rhapsody', 'Queen', 355),
+(1, 2, 'Don''t Stop Believin''', 'Journey', 251),
+(1, 3, 'Hotel California', 'Eagles', 390),
+(2, 1, 'Billie Jean', 'Michael Jackson', 294),
+(2, 2, 'Like a Prayer', 'Madonna', 351),
+(2, 3, 'Sweet Child o'' Mine', 'Guns N'' Roses', 356),
+(3, 1, 'Stairway to Heaven', 'Led Zeppelin', 482),
+(3, 2, 'Imagine', 'John Lennon', 183),
+(3, 3, 'Smells Like Teen Spirit', 'Nirvana', 301),
+(4, 1, 'Take Five', 'Dave Brubeck', 324),
+(4, 2, 'So What', 'Miles Davis', 562),
+(4, 3, 'My Favorite Things', 'John Coltrane', 822),
+(5, 1, 'Smells Like Teen Spirit', 'Nirvana', 301),
+(5, 2, 'Wannabe', 'Spice Girls', 172),
+(5, 3, 'I Want It That Way', 'Backstreet Boys', 213),
+(6, 1, 'Loser', 'Beck', 235),
+(6, 2, 'Creep', 'Radiohead', 235),
+(6, 3, 'No Rain', 'Blind Melon', 217),
+(7, 1, 'Lose Yourself', 'Eminem', 326),
+(7, 2, 'California Love', '2Pac', 285),
+(7, 3, 'Gin and Juice', 'Snoop Dogg', 211),
+(8, 1, 'Take Me Home, Country Roads', 'John Denver', 188),
+(8, 2, 'The Gambler', 'Kenny Rogers', 212),
+(8, 3, 'Ring of Fire', 'Johnny Cash', 157),
+(9, 1, 'Around the World', 'Daft Punk', 429),
+(9, 2, 'Blue Monday', 'New Order', 449),
+(9, 3, 'One More Time', 'Daft Punk', 320),
+(10, 1, 'Could You Be Loved', 'Bob Marley', 237),
+(10, 2, 'Redemption Song', 'Bob Marley', 229),
+(10, 3, 'No Woman, No Cry', 'Bob Marley', 429);
 
 
 -- EX01 
@@ -136,11 +137,14 @@ Select Max(Valor_Pago)
 From CDs )
 
 -- Group By
+SELECT COD_CD, SUM(Tempo) as Tempo_Total
+From Musica
+GROUP BY COD_CD;
 
--- Refazer por ser time
-SELECT count(Tempo)
-From Musica Group By Tempo
+SELECT Count(*) as Quantidade_CDs
+From CDs;
 
-SELECT count(COD_CD)
-From CDs Group By COD_CD
+SELECT COD_CD, Count(*) as Quantidade_Musicas
+From Musica
+GROUP BY COD_CD;
 
