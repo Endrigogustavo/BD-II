@@ -118,4 +118,3 @@ WHERE CodDepartamento = (
     FROM Departamentos
     WHERE NomeDepto = 'Desenvolvimento'
 );
-
