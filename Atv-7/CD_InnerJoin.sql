@@ -1,9 +1,6 @@
 CREATE DATABASE BD_LojaCD
 USE BD_LojaCD
 
-CREATE DATABASE BD_LojaCD;
-USE BD_LojaCD;
-
 CREATE TABLE CDs(
     COD_CD INT NOT NULL,
     Nome_CD VARCHAR(120) NOT NULL,
@@ -141,10 +138,10 @@ SELECT COD_CD, SUM(Tempo) as Tempo_Total
 From Musica
 GROUP BY COD_CD;
 
-SELECT Count(*) as Quantidade_CDs
-From CDs;
+SELECT Album, Count(*) as Quantidade_CDs
+From CDs
+Group By Album;
 
 SELECT COD_CD, Count(*) as Quantidade_Musicas
 From Musica
 GROUP BY COD_CD;
-
