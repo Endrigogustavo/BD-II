@@ -101,9 +101,21 @@ ON Departamentos.Codigo_depto = Funcionarios.CodDepartamento
 ORDER BY Departamentos.NomeDepto, Funcionarios.NomeFunc
 
 -- Group By
+
+SELECT Funcionarios.CodDepartamento, Departamentos.NomeDepto, SUM(Salario) AS Folha_Pagamento
+FROM Funcionarios INNER JOIN Departamentos
+ON Funcionarios.CodDepartamento = Departamentos.Codigo_depto
+GROUP BY CodDepartamento, NomeDepto;
+
 SELECT CodDepartamento, SUM(Salario) AS Folha_Pagamento
 FROM Funcionarios
 GROUP BY CodDepartamento;
+
+
+SELECT Funcionarios.CodDepartamento, Departamentos.NomeDepto, MIN(Salario) AS Folha_Pagamento
+FROM Funcionarios INNER JOIN Departamentos
+ON Funcionarios.CodDepartamento = Departamentos.Codigo_depto
+GROUP BY CodDepartamento, NomeDepto;
 
 SELECT CodDepartamento, MIN(Salario) AS Menor_Salario
 FROM Funcionarios
