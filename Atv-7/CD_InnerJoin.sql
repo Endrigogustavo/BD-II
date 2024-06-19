@@ -127,13 +127,17 @@ ON CDs.COD_CD = Musica.COD_CD
 WHERE Musica.Numero_Musica=1
 
 -- Sub Query
-SELECT Nome_CD
+SELECT Nome_CD, Valor_Pago
 From CDs
 Where Valor_Pago = (
 Select Max(Valor_Pago) 
 From CDs )
 
 -- Group By
+SELECT COD_CD, Nome_Musica, SUM(Tempo) as Tempo_Total
+From Musica
+GROUP BY COD_CD, Nome_Musica;
+
 SELECT COD_CD, SUM(Tempo) as Tempo_Total
 From Musica
 GROUP BY COD_CD;
