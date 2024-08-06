@@ -1,12 +1,21 @@
 CREATE DATABASE Comércio
 USE Comércio
 
+
 Create Table TBL_Estado_Civil(
 		cod_est_civ int,
 		desc_est_civ Varchar(30),
 
 		Primary Key(cod_est_civ)
 );
+
+
+INSERT INTO TBL_Estado_Civil (cod_est_civ, desc_est_civ) VALUES
+(1, 'Solteiro'),
+(2, 'Casado'),
+(3, 'Separado'),
+(4, 'Divorciado'),
+(5, 'Viúvo')
 
 Create Table TBL_Tipo_Fone(
 		cod_fone int,
@@ -15,6 +24,13 @@ Create Table TBL_Tipo_Fone(
 		Primary Key(cod_fone)
 );
 
+INSERT INTO TBL_Tipo_Fone (cod_fone, desc_fone) VALUES
+(1, 'Fixo'),
+(2, 'Celular'),
+(3, 'inteligente'),
+(4, 'satélite'),
+(5, 'Público')
+
 Create Table TBL_Produto(
 		cod_produto int,
 		nome_produto Varchar(30),
@@ -22,6 +38,13 @@ Create Table TBL_Produto(
 
 		Primary Key(cod_produto)
 );
+
+INSERT INTO TBL_Produto (cod_produto, nome_produto, tipo_produto) VALUES
+(1, 'Fixo'),
+(2, 'Celular'),
+(3, 'inteligente'),
+(4, 'satélite'),
+(5, 'Público')
 
 Create Table TBL_Func(
 		cod_func int,
