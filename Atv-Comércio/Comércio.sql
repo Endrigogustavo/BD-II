@@ -3,13 +3,11 @@ USE Comércio
 
 
 Create Table TBL_Estado_Civil(
-		cod_est_civ int,
-		desc_est_civ Varchar(30),
+	cod_est_civ int,
+	desc_est_civ Varchar(30),
 
-		Primary Key(cod_est_civ)
+	Primary Key(cod_est_civ)
 );
-
-
 INSERT INTO TBL_Estado_Civil (cod_est_civ, desc_est_civ) VALUES
 (1, 'Solteiro'),
 (2, 'Casado'),
@@ -23,12 +21,11 @@ INSERT INTO TBL_Estado_Civil (cod_est_civ, desc_est_civ) VALUES
 (10, 'Noivo');
 
 Create Table TBL_Tipo_Fone(
-		cod_fone int,
-		desc_fone Varchar(30),
+	cod_fone int,
+	desc_fone Varchar(30),
 
-		Primary Key(cod_fone)
+	Primary Key(cod_fone)
 );
-
 INSERT INTO TBL_Tipo_Fone (cod_fone, desc_fone) VALUES
 (1, 'Fixo'),
 (2, 'Celular'),
@@ -42,13 +39,12 @@ INSERT INTO TBL_Tipo_Fone (cod_fone, desc_fone) VALUES
 (10, 'Rádio');
 
 Create Table TBL_Produto(
-		cod_produto int,
-		nome_produto Varchar(30),
-		tipo_produto Varchar(50),
+	cod_produto int,
+	nome_produto Varchar(30),
+	tipo_produto Varchar(50),
 
-		Primary Key(cod_produto)
+	Primary Key(cod_produto)
 );
-
 INSERT INTO TBL_Produto (cod_produto, nome_produto, tipo_produto) VALUES
 (1, 'Notebook', 'Eletrônico'),
 (2, 'Smartphone', 'Eletrônico'),
@@ -61,12 +57,11 @@ INSERT INTO TBL_Produto (cod_produto, nome_produto, tipo_produto) VALUES
 (9, 'Câmera', 'Periférico'),
 (10, 'Smartwatch', 'Eletrônico');
 
-
 Create Table TBL_Func(
-		cod_func int,
-		nome_func Varchar(60),
+	cod_func int,
+	nome_func Varchar(60),
 
-		Primary Key(cod_func)
+	Primary Key(cod_func)
 );
 INSERT INTO TBL_Func (cod_func, nome_func) VALUES
 (1, 'João Silva'),
@@ -81,10 +76,10 @@ INSERT INTO TBL_Func (cod_func, nome_func) VALUES
 (10, 'Cláudia Mendes');
 
 Create Table TBL_Premio(
-		cod_func int,
-		valor_premio Varchar(60),
+	cod_func int,
+	valor_premio Varchar(60),
 
-		Foreign Key(cod_func) References TBL_Func
+	Foreign Key(cod_func) References TBL_Func
 );
 INSERT INTO TBL_Premio (cod_func, valor_premio) VALUES
 (1, '1000.00'),
@@ -99,13 +94,13 @@ INSERT INTO TBL_Premio (cod_func, valor_premio) VALUES
 (10, '1350.00');
 
 Create Table TBL_Dependente(
-		cod_dep int,
-		nome_dep Varchar(50),
-		data_nasc Date,
-		cod_func int,
+	cod_dep int,
+	nome_dep Varchar(50),
+	data_nasc Date,
+	cod_func int,
 
-		Primary Key(cod_dep),
-		Foreign Key(cod_func) References TBL_Func
+	Primary Key(cod_dep),
+	Foreign Key(cod_func) References TBL_Func
 );
 INSERT INTO TBL_Dependente (cod_dep, nome_dep, data_nasc, cod_func) VALUES
 (1, 'Pedro Silva', '2010-05-15', 1),
@@ -121,14 +116,14 @@ INSERT INTO TBL_Dependente (cod_dep, nome_dep, data_nasc, cod_func) VALUES
 
 
 Create Table TBL_Cliente(
-		cod_cliente int,
-		nome_cliente Varchar(50),
-		data_nasc Date,
-		cod_est_civ int,
-		salario Float,
+	cod_cliente int,
+	nome_cliente Varchar(50),
+	data_nasc Date,
+	cod_est_civ int,
+	salario Float,
 
-		Primary Key(cod_cliente),
-		Foreign Key(cod_est_civ) References TBL_Estado_Civil
+	Primary Key(cod_cliente),
+	Foreign Key(cod_est_civ) References TBL_Estado_Civil
 );
 INSERT INTO TBL_Cliente (cod_cliente, nome_cliente, data_nasc, cod_est_civ, salario) VALUES
 (1, 'José da Silva', '1985-04-10', 1, 3000.00),
@@ -142,15 +137,13 @@ INSERT INTO TBL_Cliente (cod_cliente, nome_cliente, data_nasc, cod_est_civ, sala
 (9, 'Renata Pereira', '1983-01-20', 9, 2900.00),
 (10, 'André Araújo', '1995-02-25', 10, 3800.00);
 
-
-
 Create Table TBL_Telefone(
-		cod_cliente int,
-		cod_fone int,
-		numero_fone Varchar(20),
+	cod_cliente int,
+	cod_fone int,
+	numero_fone Varchar(20),
 
-		Foreign Key(cod_cliente) References TBL_Cliente,
-		Foreign Key(cod_fone) References TBL_Tipo_Fone
+	Foreign Key(cod_cliente) References TBL_Cliente,
+	Foreign Key(cod_fone) References TBL_Tipo_Fone
 );
 INSERT INTO TBL_Telefone (cod_cliente, cod_fone, numero_fone) VALUES
 (1, 2, '99999-1234'),
@@ -165,12 +158,12 @@ INSERT INTO TBL_Telefone (cod_cliente, cod_fone, numero_fone) VALUES
 (10, 4, '5678-1234');
 
 Create Table TBL_Conjuge(
-		cod_conjuge int,
-		nome_conjuge Varchar(60),
-		cod_cliente int
+	cod_conjuge int,
+	nome_conjuge Varchar(60),
+	cod_cliente int
 
-		Foreign Key(cod_cliente) References TBL_Cliente,
-		Primary Key(cod_conjuge)
+	Foreign Key(cod_cliente) References TBL_Cliente,
+	Primary Key(cod_conjuge)
 );
 INSERT INTO TBL_Conjuge (cod_conjuge, nome_conjuge, cod_cliente) VALUES
 (1, 'Patrícia da Silva', 2),
@@ -186,14 +179,14 @@ INSERT INTO TBL_Conjuge (cod_conjuge, nome_conjuge, cod_cliente) VALUES
 
 
 Create Table TBL_Pedido(
-		cod_pedido int,
-		cod_cliente int,
-		cod_fun int,
-		data_pedido Date,
+	cod_pedido int,
+	cod_cliente int,
+	cod_fun int,
+	data_pedido Date,
 
-		Primary Key(cod_pedido),
-		Foreign Key(cod_cliente) References TBL_Cliente,
-		Foreign Key(cod_fun) References TBL_Func
+	Primary Key(cod_pedido),
+	Foreign Key(cod_cliente) References TBL_Cliente,
+	Foreign Key(cod_fun) References TBL_Func
 );
 INSERT INTO TBL_Pedido (cod_pedido, cod_cliente, cod_fun, data_pedido) VALUES
 (1, 1, 2, '2023-06-10'),
@@ -208,12 +201,12 @@ INSERT INTO TBL_Pedido (cod_pedido, cod_cliente, cod_fun, data_pedido) VALUES
 (10, 10, 9, '2023-10-21');
 
 Create Table TBL_Item_Pedido(
-		cod_pedido int,
-		cod_produto int,
-		qtde_produto int,
+	cod_pedido int,
+	cod_produto int,
+	qtde_produto int,
 
-		Foreign Key(cod_pedido) References TBL_Pedido,
-		Foreign Key(cod_produto) References TBL_Produto
+	Foreign Key(cod_pedido) References TBL_Pedido,
+	Foreign Key(cod_produto) References TBL_Produto
 );
 INSERT INTO TBL_Item_Pedido (cod_pedido, cod_produto, qtde_produto) VALUES
 (1, 1, 2),
@@ -226,3 +219,76 @@ INSERT INTO TBL_Item_Pedido (cod_pedido, cod_produto, qtde_produto) VALUES
 (8, 6, 3),
 (9, 8, 2),
 (10, 10, 4);
+
+select TBL_Clientes.nome_cliente, TBL_Telefone.numero_fone 
+from TBL_Clientes 
+inner join  TBL_Telefone on TBL_Clientes.cod_cliente = TBL_Telefone.cod_cliente
+
+select TBL_Clientes.nome_cliente, TBL_Conjuge.nome_conjuge 
+from TBL_Clientes 
+inner join TBL_Conjuge on TBL_Clientes.cod_cliente = TBL_Conjuge.cod_cliente 
+where cod_estadocivil = 2;
+
+select TBL_Clientes.nome_cliente, TBL_Telefone.numero_fone, TBL_Tipo_Fone.desc_fone
+from TBL_Clientes 
+inner join TBL_Telefone on TBL_Clientes.cod_cliente = TBL_Telefone.cod_cliente
+Inner join TBL_Tipo_Fone on TBL_Telefone.cod_fone = TBL_Tipo_Fone.cod_fone
+
+
+Select TBL_Clientes.nome_cliente, TBL_Func.nome_func, TBL_Pedido.*
+from TBL_Clientes 
+inner join TBL_Pedido on TBL_Clientes.cod_cliente = TBL_Pedido.cod_cliente
+inner join TBL_Func on TBL_Pedido.cod_func = TBL_Func.cod_func
+
+select TBL_Pedido.cod_pedido, TBL_Pedido.data_pedido , TBL_Clientes.nome_cliente
+from TBL_Pedido 
+inner join TBL_Clientes on TBL_Pedido.cod_cliente = TBL_Clientes.cod_cliente
+where TBL_Pedido.cod_func = 2
+
+select TBL_Pedido.cod_pedido, TBL_Pedido.data_pedido , TBL_Func.nome_func
+from TBL_Pedido 
+inner join TBL_Func on TBL_Pedido.cod_func = TBL_Func.cod_func
+where TBL_Pedido.cod_cliente = 4
+
+/*Parte 2*/
+select TBL_Func.nome_func, TBL_Dependente.nome_dep, TBL_Dependente.data_nasc
+from TBL_Dependente 
+inner join TBL_Func on TBL_Dependente.cod_func = TBL_Func.cod_func;
+
+select TBL_Pedido.cod_pedido, TBL_Pedido.data_pedido , TBL_Produto.nome_produto 
+from TBL_Pedido 
+inner join TBL_Item_Pedido on TBL_Item_Pedido.cod_pedido =  TBL_Pedido.cod_pedido
+inner join TBL_Produto on TBL_Item_Pedido.cod_produto = TBL_Produto.cod_produto
+
+select TBL_Pedido.cod_pedido , TBL_Pedido.data_pedido , TBL_Func.nome_func
+from TBL_Func 
+inner join TBL_Pedido on TBL_Func.cod_func = TBL_Pedido.cod_func
+inner join TBL_Item_Pedido on TBL_Pedido.cod_pedido = TBL_Item_Pedido.cod_pedido
+inner join TBL_Produto on TBL_Item_Pedido.cod_produto = TBL_Produto.cod_produto
+where nome_produto like 'Nutella'
+
+select TBL_Pedido.cod_pedido , TBL_Pedido.data_pedido , TBL_Produto.nome_produto
+from TBL_Clientes 
+inner join TBL_Pedido on TBL_Clientes.cod_cliente = TBL_Pedido.cod_cliente
+inner join TBL_Item_Pedido on TBL_Pedido.cod_pedido = TBL_Item_Pedido.cod_pedido
+inner join TBL_Produto on TBL_Item_Pedido.cod_produto = TBL_Produto.cod_produto
+where nome_cliente like 'Chris Evans'
+
+
+select TBL_Produto.nome_produto 
+from TBL_Produto 
+inner join TBL_Pedido on TBL_Produto.cod_produto = TBL_Pedido.cod_pedido
+inner join TBL_Func on TBL_Pedido.cod_func = TBL_Func.cod_func
+where nome_func like 'Maria Oliveira'
+
+select TBL_Clientes.nome_cliente , TBL_Produto.nome_produto from
+TBL_Clientes 
+inner join TBL_Pedido on TBL_Clientes.cod_cliente = TBL_Pedido.cod_cliente
+inner join TBL_Item_Pedido on TBL_Pedido.cod_pedido = TBL_Item_Pedido.cod_pedido
+inner join TBL_Produto on TBL_Item_Pedido.cod_produto = TBL_Produto.cod_produto
+
+select TBL_Func.nome_func , TBL_Produto.nome_produto from
+TBL_Func 
+inner join TBL_Pedido on TBL_Func.cod_func = TBL_Pedido.cod_func
+inner join TBL_Item_Pedido on TBL_Pedido.cod_pedido = TBL_Item_Pedido.cod_pedido
+inner join TBL_Produto on TBL_Item_Pedido.cod_produto = TBL_Produto.cod_produto
