@@ -220,24 +220,24 @@ INSERT INTO TBL_Item_Pedido (cod_pedido, cod_produto, qtde_produto) VALUES
 (9, 8, 2),
 (10, 10, 4);
 
-select TBL_Clientes.nome_cliente, TBL_Telefone.numero_fone 
-from TBL_Clientes 
-inner join  TBL_Telefone on TBL_Clientes.cod_cliente = TBL_Telefone.cod_cliente
+select TBL_Cliente.nome_cliente, TBL_Telefone.numero_fone 
+from TBL_Cliente 
+inner join  TBL_Telefone on TBL_Cliente.cod_cliente = TBL_Telefone.cod_cliente
 
-select TBL_Clientes.nome_cliente, TBL_Conjuge.nome_conjuge 
-from TBL_Clientes 
-inner join TBL_Conjuge on TBL_Clientes.cod_cliente = TBL_Conjuge.cod_cliente 
-where cod_estadocivil = 2;
+select TBL_Cliente.nome_cliente, TBL_Conjuge.nome_conjuge 
+from TBL_Cliente 
+inner join TBL_Conjuge on TBL_Cliente.cod_cliente = TBL_Conjuge.cod_cliente 
+where cod_est_civ = 2;
 
-select TBL_Clientes.nome_cliente, TBL_Telefone.numero_fone, TBL_Tipo_Fone.desc_fone
-from TBL_Clientes 
-inner join TBL_Telefone on TBL_Clientes.cod_cliente = TBL_Telefone.cod_cliente
+select TBL_Cliente.nome_cliente, TBL_Telefone.numero_fone, TBL_Tipo_Fone.desc_fone
+from TBL_Cliente 
+inner join TBL_Telefone on TBL_Cliente.cod_cliente = TBL_Telefone.cod_cliente
 Inner join TBL_Tipo_Fone on TBL_Telefone.cod_fone = TBL_Tipo_Fone.cod_fone
 
 
-Select TBL_Clientes.nome_cliente, TBL_Func.nome_func, TBL_Pedido.*
-from TBL_Clientes 
-inner join TBL_Pedido on TBL_Clientes.cod_cliente = TBL_Pedido.cod_cliente
+Select TBL_Cliente.nome_cliente, TBL_Func.nome_func, TBL_Pedido.*
+from TBL_Cliente 
+inner join TBL_Pedido on TBL_Cliente.cod_cliente = TBL_Pedido.cod_cliente
 inner join TBL_Func on TBL_Pedido.cod_func = TBL_Func.cod_func
 
 select TBL_Pedido.cod_pedido, TBL_Pedido.data_pedido , TBL_Clientes.nome_cliente
