@@ -55,7 +55,7 @@ INSERT INTO TBL_Produto (cod_produto, nome_produto, tipo_produto) VALUES
 (7, 'Impressora', 'Periférico'),
 (8, 'Headset', 'Acessório'),
 (9, 'Câmera', 'Periférico'),
-(10, 'Smartwatch', 'Eletrônico');
+(10, 'Fosfuro', 'Quimico');
 
 Create Table TBL_Func(
 	cod_func int,
@@ -64,14 +64,14 @@ Create Table TBL_Func(
 	Primary Key(cod_func)
 );
 INSERT INTO TBL_Func (cod_func, nome_func) VALUES
-(1, 'João Silva'),
+(1, 'Roseane'),
 (2, 'Maria Oliveira'),
 (3, 'Carlos Santos'),
 (4, 'Ana Souza'),
 (5, 'Roberto Lima'),
 (6, 'Paula Costa'),
 (7, 'Marcos Pereira'),
-(8, 'Juliana Alves'),
+(8, 'Francisco'),
 (9, 'Fernando Araújo'),
 (10, 'Cláudia Mendes');
 
@@ -126,7 +126,7 @@ Create Table TBL_Cliente(
 	Foreign Key(cod_est_civ) References TBL_Estado_Civil
 );
 INSERT INTO TBL_Cliente (cod_cliente, nome_cliente, data_nasc, cod_est_civ, salario) VALUES
-(1, 'José da Silva', '1985-04-10', 1, 3000.00),
+(1, 'Daniel', '1985-04-10', 1, 3000.00),
 (2, 'Maria de Souza', '1990-05-15', 2, 3500.00),
 (3, 'Carlos Santos', '1978-07-20', 3, 4000.00),
 (4, 'Ana Oliveira', '1982-08-25', 4, 4500.00),
@@ -135,7 +135,7 @@ INSERT INTO TBL_Cliente (cod_cliente, nome_cliente, data_nasc, cod_est_civ, sala
 (7, 'Ricardo Alves', '1988-11-10', 7, 3300.00),
 (8, 'Juliana Mendes', '1975-12-15', 8, 4100.00),
 (9, 'Renata Pereira', '1983-01-20', 9, 2900.00),
-(10, 'André Araújo', '1995-02-25', 10, 3800.00);
+(10, 'Rener', '1995-02-25', 10, 3800.00);
 
 Create Table TBL_Telefone(
 	cod_cliente int,
@@ -220,46 +220,64 @@ INSERT INTO TBL_Item_Pedido (cod_pedido, cod_produto, qtde_produto) VALUES
 (9, 8, 2),
 (10, 10, 4);
 
-select TBL_Cliente.nome_cliente, TBL_Telefone.numero_fone 
-from TBL_Cliente 
-inner join  TBL_Telefone on TBL_Cliente.cod_cliente = TBL_Telefone.cod_cliente
+--Parte 1
 
-select TBL_Cliente.nome_cliente, TBL_Conjuge.nome_conjuge 
-from TBL_Cliente 
-inner join TBL_Conjuge on TBL_Cliente.cod_cliente = TBL_Conjuge.cod_cliente 
-where cod_est_civ = 2;
+--Execício 1
+Select TBL_Cliente.nome_cliente, TBL_Telefone.numero_fone 
+From TBL_Cliente 
+INNER JOIN  
+TBL_Telefone on TBL_Cliente.cod_cliente = TBL_Telefone.cod_cliente
 
-select TBL_Cliente.nome_cliente, TBL_Telefone.numero_fone, TBL_Tipo_Fone.desc_fone
-from TBL_Cliente 
-inner join TBL_Telefone on TBL_Cliente.cod_cliente = TBL_Telefone.cod_cliente
-Inner join TBL_Tipo_Fone on TBL_Telefone.cod_fone = TBL_Tipo_Fone.cod_fone
+--Execício 2
+Select TBL_Cliente.nome_cliente, TBL_Conjuge.nome_conjuge 
+From TBL_Cliente 
+INNER JOIN 
+TBL_Conjuge on TBL_Cliente.cod_cliente = TBL_Conjuge.cod_cliente 
+Where cod_est_civ = 2;
 
+--Execício 3
+Select TBL_Cliente.nome_cliente, TBL_Telefone.numero_fone, TBL_Tipo_Fone.desc_fone
+From TBL_Cliente 
+INNER JOIN 
+TBL_Telefone on TBL_Cliente.cod_cliente = TBL_Telefone.cod_cliente
+INNER JOIN
+TBL_Tipo_Fone on TBL_Telefone.cod_fone = TBL_Tipo_Fone.cod_fone
 
+--Execício 4
 Select TBL_Cliente.nome_cliente, TBL_Func.nome_func, TBL_Pedido.*
-from TBL_Cliente 
-inner join TBL_Pedido on TBL_Cliente.cod_cliente = TBL_Pedido.cod_cliente
-inner join TBL_Func on TBL_Pedido.cod_func = TBL_Func.cod_func
+From TBL_Cliente 
+INNER JOIN 
+TBL_Pedido on TBL_Cliente.cod_cliente = TBL_Pedido.cod_cliente
+INNER JOIN 
+TBL_Func on TBL_Pedido.cod_fun = TBL_Func.cod_func
 
-select TBL_Pedido.cod_pedido, TBL_Pedido.data_pedido , TBL_Clientes.nome_cliente
-from TBL_Pedido 
-inner join TBL_Clientes on TBL_Pedido.cod_cliente = TBL_Clientes.cod_cliente
-where TBL_Pedido.cod_func = 2
+--Execício 5
+Select TBL_Pedido.cod_pedido, TBL_Pedido.data_pedido , TBL_Cliente.nome_cliente
+From TBL_Pedido 
+INNER JOIN 
+TBL_Cliente on TBL_Pedido.cod_cliente = TBL_Cliente.cod_cliente
+Where TBL_Pedido.cod_fun = 2
 
-select TBL_Pedido.cod_pedido, TBL_Pedido.data_pedido , TBL_Func.nome_func
-from TBL_Pedido 
-inner join TBL_Func on TBL_Pedido.cod_func = TBL_Func.cod_func
-where TBL_Pedido.cod_cliente = 4
+--Execício 6
+Select TBL_Pedido.cod_pedido, TBL_Pedido.data_pedido , TBL_Func.nome_func
+From TBL_Pedido 
+INNER JOIN  
+TBL_Func on TBL_Pedido.cod_fun = TBL_Func.cod_func
+Where TBL_Pedido.cod_cliente = 4
 
-/*Parte 2*/
+--Parte 2
+--Execício 7
 select TBL_Func.nome_func, TBL_Dependente.nome_dep, TBL_Dependente.data_nasc
 from TBL_Dependente 
 inner join TBL_Func on TBL_Dependente.cod_func = TBL_Func.cod_func;
 
+--Execício 8
 select TBL_Pedido.cod_pedido, TBL_Pedido.data_pedido , TBL_Produto.nome_produto 
 from TBL_Pedido 
 inner join TBL_Item_Pedido on TBL_Item_Pedido.cod_pedido =  TBL_Pedido.cod_pedido
 inner join TBL_Produto on TBL_Item_Pedido.cod_produto = TBL_Produto.cod_produto
 
+--Execício 9
 select TBL_Pedido.cod_pedido , TBL_Pedido.data_pedido , TBL_Func.nome_func
 from TBL_Func 
 inner join TBL_Pedido on TBL_Func.cod_func = TBL_Pedido.cod_func
@@ -267,6 +285,7 @@ inner join TBL_Item_Pedido on TBL_Pedido.cod_pedido = TBL_Item_Pedido.cod_pedido
 inner join TBL_Produto on TBL_Item_Pedido.cod_produto = TBL_Produto.cod_produto
 where nome_produto like 'Nutella'
 
+--Execício 10
 select TBL_Pedido.cod_pedido , TBL_Pedido.data_pedido , TBL_Produto.nome_produto
 from TBL_Clientes 
 inner join TBL_Pedido on TBL_Clientes.cod_cliente = TBL_Pedido.cod_cliente
@@ -274,19 +293,21 @@ inner join TBL_Item_Pedido on TBL_Pedido.cod_pedido = TBL_Item_Pedido.cod_pedido
 inner join TBL_Produto on TBL_Item_Pedido.cod_produto = TBL_Produto.cod_produto
 where nome_cliente like 'Chris Evans'
 
-
+--Execício 11
 select TBL_Produto.nome_produto 
 from TBL_Produto 
 inner join TBL_Pedido on TBL_Produto.cod_produto = TBL_Pedido.cod_pedido
 inner join TBL_Func on TBL_Pedido.cod_func = TBL_Func.cod_func
 where nome_func like 'Maria Oliveira'
 
+--Execício 12
 select TBL_Clientes.nome_cliente , TBL_Produto.nome_produto from
 TBL_Clientes 
 inner join TBL_Pedido on TBL_Clientes.cod_cliente = TBL_Pedido.cod_cliente
 inner join TBL_Item_Pedido on TBL_Pedido.cod_pedido = TBL_Item_Pedido.cod_pedido
 inner join TBL_Produto on TBL_Item_Pedido.cod_produto = TBL_Produto.cod_produto
 
+--Execício 13
 select TBL_Func.nome_func , TBL_Produto.nome_produto from
 TBL_Func 
 inner join TBL_Pedido on TBL_Func.cod_func = TBL_Pedido.cod_func
