@@ -55,7 +55,7 @@ INSERT INTO TBL_Produto (cod_produto, nome_produto, tipo_produto) VALUES
 (7, 'Impressora', 'Periférico'),
 (8, 'Headset', 'Acessório'),
 (9, 'Câmera', 'Periférico'),
-(10, 'Fosfuro', 'Quimico');
+(10, 'Fosforo', 'Quimico');
 
 Create Table TBL_Func(
 	cod_func int,
@@ -225,23 +225,23 @@ INSERT INTO TBL_Item_Pedido (cod_pedido, cod_produto, qtde_produto) VALUES
 --Execício 1
 Select TBL_Cliente.nome_cliente, TBL_Telefone.numero_fone 
 From TBL_Cliente 
-INNER JOIN  
-TBL_Telefone on TBL_Cliente.cod_cliente = TBL_Telefone.cod_cliente
+INNER JOIN TBL_Telefone 
+ON TBL_Cliente.cod_cliente = TBL_Telefone.cod_cliente
 
 --Execício 2
 Select TBL_Cliente.nome_cliente, TBL_Conjuge.nome_conjuge 
 From TBL_Cliente 
-INNER JOIN 
-TBL_Conjuge on TBL_Cliente.cod_cliente = TBL_Conjuge.cod_cliente 
+INNER JOIN TBL_Conjuge 
+ON TBL_Cliente.cod_cliente = TBL_Conjuge.cod_cliente 
 Where cod_est_civ = 2;
 
 --Execício 3
 Select TBL_Cliente.nome_cliente, TBL_Telefone.numero_fone, TBL_Tipo_Fone.desc_fone
 From TBL_Cliente 
-INNER JOIN 
-TBL_Telefone on TBL_Cliente.cod_cliente = TBL_Telefone.cod_cliente
-INNER JOIN
-TBL_Tipo_Fone on TBL_Telefone.cod_fone = TBL_Tipo_Fone.cod_fone
+INNER JOIN TBL_Telefone 
+ON TBL_Cliente.cod_cliente = TBL_Telefone.cod_cliente
+INNER JOIN TBL_Tipo_Fone 
+ON TBL_Telefone.cod_fone = TBL_Tipo_Fone.cod_fone
 
 --Execício 4
 Select TBL_Cliente.nome_cliente, TBL_Func.nome_func, TBL_Pedido.*
@@ -254,62 +254,79 @@ TBL_Func on TBL_Pedido.cod_fun = TBL_Func.cod_func
 --Execício 5
 Select TBL_Pedido.cod_pedido, TBL_Pedido.data_pedido , TBL_Cliente.nome_cliente
 From TBL_Pedido 
-INNER JOIN 
-TBL_Cliente on TBL_Pedido.cod_cliente = TBL_Cliente.cod_cliente
+INNER JOIN TBL_Cliente 
+ON TBL_Pedido.cod_cliente = TBL_Cliente.cod_cliente
 Where TBL_Pedido.cod_fun = 2
 
 --Execício 6
 Select TBL_Pedido.cod_pedido, TBL_Pedido.data_pedido , TBL_Func.nome_func
 From TBL_Pedido 
-INNER JOIN  
-TBL_Func on TBL_Pedido.cod_fun = TBL_Func.cod_func
+INNER JOIN TBL_Func
+ON TBL_Pedido.cod_fun = TBL_Func.cod_func
 Where TBL_Pedido.cod_cliente = 4
 
 --Parte 2
 --Execício 7
-select TBL_Func.nome_func, TBL_Dependente.nome_dep, TBL_Dependente.data_nasc
-from TBL_Dependente 
-inner join TBL_Func on TBL_Dependente.cod_func = TBL_Func.cod_func;
+Select TBL_Func.nome_func, TBL_Dependente.nome_dep, TBL_Dependente.data_nasc
+From TBL_Dependente 
+INNER JOIN TBL_Func 
+ON TBL_Dependente.cod_func = TBL_Func.cod_func;
 
 --Execício 8
-select TBL_Pedido.cod_pedido, TBL_Pedido.data_pedido , TBL_Produto.nome_produto 
-from TBL_Pedido 
-inner join TBL_Item_Pedido on TBL_Item_Pedido.cod_pedido =  TBL_Pedido.cod_pedido
-inner join TBL_Produto on TBL_Item_Pedido.cod_produto = TBL_Produto.cod_produto
+Select TBL_Pedido.cod_pedido, TBL_Pedido.data_pedido , TBL_Produto.nome_produto 
+From TBL_Pedido 
+INNER JOIN TBL_Item_Pedido 
+ON TBL_Item_Pedido.cod_pedido = TBL_Pedido.cod_pedido
+INNER JOIN TBL_Produto 
+ON TBL_Item_Pedido.cod_produto = TBL_Produto.cod_produto
 
 --Execício 9
-select TBL_Pedido.cod_pedido , TBL_Pedido.data_pedido , TBL_Func.nome_func
-from TBL_Func 
-inner join TBL_Pedido on TBL_Func.cod_func = TBL_Pedido.cod_func
-inner join TBL_Item_Pedido on TBL_Pedido.cod_pedido = TBL_Item_Pedido.cod_pedido
-inner join TBL_Produto on TBL_Item_Pedido.cod_produto = TBL_Produto.cod_produto
-where nome_produto like 'Nutella'
+Select TBL_Pedido.cod_pedido , TBL_Pedido.data_pedido , TBL_Func.nome_func
+From TBL_Func 
+INNER JOIN TBL_Pedido 
+ON TBL_Func.cod_func = TBL_Pedido.cod_fun
+INNER JOIN TBL_Item_Pedido 
+ON TBL_Pedido.cod_pedido = TBL_Item_Pedido.cod_pedido
+INNER JOIN TBL_Produto 
+ON TBL_Item_Pedido.cod_produto = TBL_Produto.cod_produto
+where nome_produto like 'Fosforo'
 
 --Execício 10
-select TBL_Pedido.cod_pedido , TBL_Pedido.data_pedido , TBL_Produto.nome_produto
-from TBL_Clientes 
-inner join TBL_Pedido on TBL_Clientes.cod_cliente = TBL_Pedido.cod_cliente
-inner join TBL_Item_Pedido on TBL_Pedido.cod_pedido = TBL_Item_Pedido.cod_pedido
-inner join TBL_Produto on TBL_Item_Pedido.cod_produto = TBL_Produto.cod_produto
-where nome_cliente like 'Chris Evans'
+Select TBL_Pedido.cod_pedido , TBL_Pedido.data_pedido , TBL_Produto.nome_produto
+From TBL_Cliente 
+INNER JOIN TBL_Pedido 
+ON TBL_Cliente.cod_cliente = TBL_Pedido.cod_cliente
+INNER JOIN TBL_Item_Pedido 
+ON TBL_Pedido.cod_pedido = TBL_Item_Pedido.cod_pedido
+INNER JOIN TBL_Produto 
+ON TBL_Item_Pedido.cod_produto = TBL_Produto.cod_produto
+where nome_cliente like 'Daniel'
 
 --Execício 11
-select TBL_Produto.nome_produto 
-from TBL_Produto 
-inner join TBL_Pedido on TBL_Produto.cod_produto = TBL_Pedido.cod_pedido
-inner join TBL_Func on TBL_Pedido.cod_func = TBL_Func.cod_func
-where nome_func like 'Maria Oliveira'
+Select TBL_Produto.nome_produto 
+From TBL_Produto 
+INNER JOIN TBL_Pedido 
+ON TBL_Produto.cod_produto = TBL_Pedido.cod_pedido
+INNER JOIN TBL_Func 
+ON TBL_Pedido.cod_fun = TBL_Func.cod_func
+where nome_func like 'Roseane'
 
 --Execício 12
-select TBL_Clientes.nome_cliente , TBL_Produto.nome_produto from
-TBL_Clientes 
-inner join TBL_Pedido on TBL_Clientes.cod_cliente = TBL_Pedido.cod_cliente
-inner join TBL_Item_Pedido on TBL_Pedido.cod_pedido = TBL_Item_Pedido.cod_pedido
-inner join TBL_Produto on TBL_Item_Pedido.cod_produto = TBL_Produto.cod_produto
+Select TBL_Cliente.nome_cliente , TBL_Produto.nome_produto 
+From TBL_Cliente 
+INNER JOIN TBL_Pedido 
+ON TBL_Cliente.cod_cliente = TBL_Pedido.cod_cliente
+INNER JOIN TBL_Item_Pedido 
+ON TBL_Pedido.cod_pedido = TBL_Item_Pedido.cod_pedido
+INNER JOIN TBL_Produto 
+ON TBL_Item_Pedido.cod_produto = TBL_Produto.cod_produto
 
 --Execício 13
-select TBL_Func.nome_func , TBL_Produto.nome_produto from
-TBL_Func 
-inner join TBL_Pedido on TBL_Func.cod_func = TBL_Pedido.cod_func
-inner join TBL_Item_Pedido on TBL_Pedido.cod_pedido = TBL_Item_Pedido.cod_pedido
-inner join TBL_Produto on TBL_Item_Pedido.cod_produto = TBL_Produto.cod_produto
+select TBL_Func.nome_func , TBL_Produto.nome_produto 
+from TBL_Func 
+INNER JOIN TBL_Pedido 
+ON TBL_Func.cod_func = TBL_Pedido.cod_fun
+INNER JOIN TBL_Item_Pedido 
+ON TBL_Pedido.cod_pedido = TBL_Item_Pedido.cod_pedido
+INNER JOIN TBL_Produto 
+ON TBL_Item_Pedido.cod_produto = TBL_Produto.cod_produto
