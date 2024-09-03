@@ -77,21 +77,22 @@ INSERT INTO TBL_Func (cod_func, nome_func) VALUES
 
 Create Table TBL_Premio(
 	cod_func int,
-	valor_premio Varchar(60),
+	valor_premio int,
 
 	Foreign Key(cod_func) References TBL_Func
 );
+
 INSERT INTO TBL_Premio (cod_func, valor_premio) VALUES
-(1, '1000.00'),
-(2, '1200.00'),
-(3, '1500.00'),
-(4, '1100.00'),
-(5, '1300.00'),
-(6, '1250.00'),
-(7, '1400.00'),
-(8, '1150.00'),
-(9, '1050.00'),
-(10, '1350.00');
+(1, 1000.00),
+(2, 1200.00),
+(3, 1500.00),
+(4, 1100.00),
+(5, 1300.00),
+(6, 1250.00),
+(7, 1400.00),
+(8, 1150.00),
+(9, 1050.00)
+
 
 Create Table TBL_Dependente(
 	cod_dep int,
@@ -110,7 +111,6 @@ INSERT INTO TBL_Dependente (cod_dep, nome_dep, data_nasc, cod_func) VALUES
 (5, 'Felipe Souza', '2011-11-10', 4),
 (6, 'Mariana Lima', '2013-01-05', 5),
 (7, 'Thiago Costa', '2014-02-22', 6),
-(8, 'Beatriz Pereira', '2015-04-18', 7),
 (9, 'Mateus Alves', '2016-06-30', 8),
 (10, 'Sofia Mendes', '2017-08-12', 10);
 
@@ -146,8 +146,6 @@ Create Table TBL_Telefone(
 	Foreign Key(cod_fone) References TBL_Tipo_Fone
 );
 INSERT INTO TBL_Telefone (cod_cliente, cod_fone, numero_fone) VALUES
-(1, 2, '99999-1234'),
-(2, 1, '3456-7890'),
 (3, 2, '98888-4321'),
 (4, 3, '98765-6789'),
 (5, 4, '1234-5678'),
@@ -195,8 +193,6 @@ INSERT INTO TBL_Pedido (cod_pedido, cod_cliente, cod_fun, data_pedido) VALUES
 (4, 7, 8, '2023-09-18'),
 (5, 9, 10, '2023-10-20'),
 (6, 2, 1, '2023-06-11'),
-(7, 4, 3, '2023-07-13'),
-(8, 6, 5, '2023-08-16'),
 (9, 8, 7, '2023-09-19'),
 (10, 10, 9, '2023-10-21');
 
@@ -215,9 +211,6 @@ INSERT INTO TBL_Item_Pedido (cod_pedido, cod_produto, qtde_produto) VALUES
 (4, 7, 3),
 (5, 9, 5),
 (6, 2, 2),
-(7, 4, 1),
-(8, 6, 3),
-(9, 8, 2),
 (10, 10, 4);
 
 --Parte 1
@@ -322,11 +315,81 @@ INNER JOIN TBL_Produto
 ON TBL_Item_Pedido.cod_produto = TBL_Produto.cod_produto
 
 --Execício 13
-select TBL_Func.nome_func , TBL_Produto.nome_produto 
-from TBL_Func 
+Select TBL_Func.nome_func , TBL_Produto.nome_produto 
+From TBL_Func 
 INNER JOIN TBL_Pedido 
 ON TBL_Func.cod_func = TBL_Pedido.cod_fun
 INNER JOIN TBL_Item_Pedido 
 ON TBL_Pedido.cod_pedido = TBL_Item_Pedido.cod_pedido
 INNER JOIN TBL_Produto 
 ON TBL_Item_Pedido.cod_produto = TBL_Produto.cod_produto
+
+--Parte 3
+
+--Execício 14
+Select TBL_Func.nome_func , SUM(TBL_Premio.valor_premio) as Total
+From TBL_Func
+INNER JOIN TBL_Premio
+ON TBL_Func.cod_func = TBL_Premio.cod_func
+Group by TBL_Func.nome_func
+
+--Execício 15
+Select TBL_Func.nome_func , COUNT(TBL_Dependente.cod_func) As Quantidade_Dependentes
+From TBL_Func
+INNER JOIN TBL_Dependente
+ON TBL_Func.cod_func = TBL_Dependente.cod_func
+Group by TBL_Func.nome_func
+
+--Execício 16
+Select TBL_Estado_Civil.desc_est_civ , COUNT(TBL_Cliente.cod_est_civ) As Situação
+From TBL_Cliente
+INNER JOIN TBL_Estado_Civil
+ON TBL_Cliente.cod_est_civ = TBL_Estado_Civil.cod_est_civ
+Where TBL_Estado_Civil.cod_est_civ in (1, 2, 3)
+Group by TBL_Estado_Civil.desc_est_civ
+
+--Execício 17
+Select * 
+From TBL_Cliente
+WHERE TBL_Cliente.cod_cliente not in (
+    SELECT TBL_Telefone.cod_cliente
+    FROM TBL_Telefone
+);
+
+--Execício 18
+Select TBL_Cliente.cod_cliente, TBL_Cliente.nome_cliente, TBL_Estado_Civil.desc_est_civ, TBL_Cliente.data_nasc, TBL_Cliente.data_nasc,  TBL_Cliente.salario
+From TBL_Cliente
+INNER JOIN TBL_Estado_Civil
+ON TBL_Cliente.cod_est_civ = TBL_Estado_Civil.cod_est_civ
+Where TBL_Estado_Civil.cod_est_civ = 1
+
+--Execício 19
+Select TBL_Cliente.cod_cliente, TBL_Cliente.nome_cliente, TBL_Estado_Civil.desc_est_civ, TBL_Cliente.data_nasc, TBL_Cliente.data_nasc,  TBL_Cliente.salario
+From TBL_Cliente
+INNER JOIN TBL_Estado_Civil
+ON TBL_Cliente.cod_est_civ = TBL_Estado_Civil.cod_est_civ
+Where TBL_Estado_Civil.cod_est_civ = 2
+
+--Execício 20
+Select * 
+From TBL_Func
+WHERE TBL_Func.cod_func not in (
+    SELECT TBL_Premio.cod_func
+    FROM TBL_Premio
+);
+
+--Execício 21
+Select * 
+From TBL_Func
+WHERE TBL_Func.cod_func not in (
+    SELECT TBL_Dependente.cod_func
+    FROM TBL_Dependente
+);
+
+--Execício 22
+Select * 
+From TBL_Produto
+WHERE TBL_Produto.cod_produto not in (
+    SELECT TBL_Item_Pedido.cod_produto
+    FROM TBL_Item_Pedido
+);
