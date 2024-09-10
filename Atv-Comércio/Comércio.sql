@@ -126,7 +126,7 @@ Create Table TBL_Cliente(
 	Foreign Key(cod_est_civ) References TBL_Estado_Civil
 );
 INSERT INTO TBL_Cliente (cod_cliente, nome_cliente, data_nasc, cod_est_civ, salario) VALUES
-(1, 'Daniel', '1985-04-10', 1, 3000.00),
+(1, 'Francisco', '1985-04-10', 1, 3000.00),
 (2, 'Maria de Souza', '1990-05-15', 2, 3500.00),
 (3, 'Carlos Santos', '1978-07-20', 3, 4000.00),
 (4, 'Ana Oliveira', '1982-08-25', 4, 4500.00),
@@ -249,7 +249,7 @@ Select TBL_Pedido.cod_pedido, TBL_Pedido.data_pedido , TBL_Cliente.nome_cliente
 From TBL_Pedido 
 INNER JOIN TBL_Cliente 
 ON TBL_Pedido.cod_cliente = TBL_Cliente.cod_cliente
-Where TBL_Pedido.cod_fun = 2
+Where TBL_Cliente.nome_cliente like 'Francisco'
 
 --Execício 6
 Select TBL_Pedido.cod_pedido, TBL_Pedido.data_pedido , TBL_Func.nome_func
