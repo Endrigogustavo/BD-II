@@ -134,7 +134,7 @@ INSERT INTO TBL_Cliente (cod_cliente, nome_cliente, data_nasc, cod_est_civ, sala
 (6, 'Fernanda Lima', '1992-10-05', 6, 3700.00),
 (7, 'Ricardo Alves', '1988-11-10', 7, 3300.00),
 (8, 'Juliana Mendes', '1975-12-15', 8, 4100.00),
-(9, 'Renata Pereira', '1983-01-20', 9, 2900.00),
+(9, 'Daniel', '1983-01-20', 9, 2900.00),
 (10, 'Rener', '1995-02-25', 10, 3800.00);
 
 Create Table TBL_Telefone(
@@ -256,7 +256,9 @@ Select TBL_Pedido.cod_pedido, TBL_Pedido.data_pedido , TBL_Func.nome_func
 From TBL_Pedido 
 INNER JOIN TBL_Func
 ON TBL_Pedido.cod_fun = TBL_Func.cod_func
-Where TBL_Pedido.cod_cliente = 4
+Where TBL_Pedido.cod_cliente = 10
+
+Select * from TBL_Pedido
 
 --Parte 2
 --Execício 7
