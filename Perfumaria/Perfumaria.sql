@@ -132,7 +132,7 @@ VALUES (1, 'SUV'),
        (9, 'Moto'), 
        (10, 'Caminhão');
 
--- Inserindo na tabela Veiculo
+
 INSERT INTO Veiculo (Cod_Car, Marca, Modelo, Ano, Cod_Tipo) 
 VALUES (1, 'Toyota', 'Corolla', 2020, 2), 
        (2, 'Honda', 'Civic', 2019, 2), 
@@ -206,5 +206,59 @@ VALUES (1, 2, 1001),
        (6, 1, 1006), 
        (7, 1, 1007), 
        (8, 1, 1008),
-	   (9, 3, 1009), 
 	   (10, 1, 1010);
+
+--A
+SELECT R.Nome_Regiao, P.Nome_Ponto
+FROM Regiao R
+JOIN Ponto_Estrategico P ON R.Cod_Reg = P.Cod_Reg;
+
+--B
+SELECT Nome_Regiao
+FROM Regiao;
+
+--C
+SELECT V.Nome AS Nome_Vendedor, VE.Marca, VE.Modelo, EV.Data_Escala
+FROM Vendedor V
+JOIN Escala_Veiculo EV ON V.Cod_Ven = EV.Cod_Ven
+JOIN Veiculo VE ON EV.Cod_Car = VE.Cod_Car
+WHERE EV.Data_Escala BETWEEN '2023-10-01' AND '2023-10-31';
+
+--D
+SELECT R.Nome_Regiao, V.Nome AS Nome_Vendedor
+FROM Regiao R
+JOIN Vendedor V ON R.Cod_Reg = V.Cod_Reg;
+
+--E
+SELECT P.Nome AS Nome_Produto, P.Marca, IC.Quantidade
+FROM Nota_Fiscal NF
+JOIN Item_Consumo IC ON NF.Cod_Nota = IC.Cod_Nota
+JOIN Produto P ON IC.Cod_Produto = P.Cod_Produto
+JOIN Vendedor V ON NF.Cod_Ven = V.Cod_Ven
+WHERE V.Nome = 'João Silva';
+
+--F
+SELECT V.Nome AS Nome_Vendedor
+FROM Nota_Fiscal NF
+JOIN Item_Consumo IC ON NF.Cod_Nota = IC.Cod_Nota
+JOIN Produto P ON IC.Cod_Produto = P.Cod_Produto
+JOIN Vendedor V ON NF.Cod_Ven = V.Cod_Ven
+WHERE P.Nome = 'Perfume Dior Sauvage';
+
+--G
+SELECT P.Nome AS Nome_Produto, P.Marca
+FROM Produto P
+WHERE P.Cod_Produto NOT IN (SELECT Cod_Produto FROM Item_Consumo);
+
+--H
+SELECT EV.Data_Escala, V.Nome AS Nome_Vendedor, VE.Marca, VE.Modelo
+FROM Escala_Veiculo EV
+JOIN Vendedor V ON EV.Cod_Ven = V.Cod_Ven
+JOIN Veiculo VE ON EV.Cod_Car = VE.Cod_Car
+WHERE VE.Cod_Car = 1;
+
+--I
+SELECT NF.Cod_Nota, SUM(IC.Quantidade) AS Total_Itens
+FROM Nota_Fiscal NF
+JOIN Item_Consumo IC ON NF.Cod_Nota = IC.Cod_Nota
+GROUP BY NF.Cod_Nota;
